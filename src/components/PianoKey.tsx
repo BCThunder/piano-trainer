@@ -1,17 +1,19 @@
+import './PianoStyling.css';
+
 interface PianoKeyProps {
     note: string,
     isBlack: boolean,
+    leftOffset: number,
     onClick: (note: string) => void,
 }
 
-function PianoKey({note, isBlack, onClick}: PianoKeyProps) {
+function PianoKey({note, isBlack, leftOffset, onClick}: PianoKeyProps) {
     return (
-        <div 
-            style={{color: isBlack ? 'Black' : 'White'}}
+        <div
+            className={`key ${isBlack ? 'black' : 'white'}`}
+            style={{left: leftOffset}}
             onClick={() => onClick(note)}
-        >
-            {note}
-        </div>
+        / >
     )
 }
 
