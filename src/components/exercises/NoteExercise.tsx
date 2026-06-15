@@ -33,8 +33,7 @@ function NoteExercise() {
                 onClick={handleGuess}
             />
             <div>
-                {feedback}
-                Score: {score}
+                {feedback} Score: {score}
             </div>
         </div>
         
