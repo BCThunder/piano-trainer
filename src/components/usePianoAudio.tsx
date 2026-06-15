@@ -1,20 +1,16 @@
 import {useRef} from 'react';
+import { NOTES } from "./constants";
 
 function usePianoAudio() {
     const audioCtx = useRef<AudioContext | null>(null);
 
+    // Note is a string of the note + octave like 'C4' or 'C#4'
     const getFrequency = (note: string): number => {
-        const MIDI: Record<string, number> = {
-            "C": 60, "C#": 61, 
-            "D": 62, "D#": 63,
-            "E": 64,
-            "F": 65, "F#": 66,
-            "G": 67, "G#": 68,
-            "A": 69, "A#": 70,
-            "B": 71,
-        }
+        const OCTAVE = parseInt(note.slice(-1));
+        const noteIndex = NOTES.indexOf(note.slice(0, -1));
+        const MIDI = (OCTAVE + 1) * 12 + noteIndex;
 
-        return ( 440 * 2**((MIDI[note] - 69) / 12) );
+        return ( 440 * 2**((MIDI - 69) / 12) );
     }
 
     const playNote = (note: string) => {

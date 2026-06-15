@@ -1,7 +1,13 @@
 import PianoKey from './PianoKey';
 import usePianoAudio from './usePianoAudio';
-import { NOTES } from "./constants";
+import { NOTES, ALL_NOTES } from "./constants";
 import "./PianoStyling.css";
+
+interface OctaveKeyTemplate {
+    noteIndex: number,
+    isBlack: boolean,
+    octaveOffset: number,
+}
 
 interface PianoKeyData {
     note: string,
@@ -11,25 +17,39 @@ interface PianoKeyData {
 
 interface KeyboardProps {
     onClick?: (note: string) => void;
+    noteStates?: Record<string, 'correct' | 'incorrect' | 'target'>;
 }
 
-function Keyboard({ onClick }: KeyboardProps) {
+function Keyboard({ onClick, noteStates }: KeyboardProps) {
     const { playNote } = usePianoAudio();
 
-    const keys: PianoKeyData[] = [
-        { note: NOTES[0], isBlack: false, leftOffset: 0 },
-        { note: NOTES[1], isBlack: true, leftOffset: 0.7 * 40 },
-        { note: NOTES[2], isBlack: false, leftOffset: 40 },
-        { note: NOTES[3], isBlack: true, leftOffset: 0.7 * 40 + 40},
-        { note: NOTES[4], isBlack: false, leftOffset: 80  },
-        { note: NOTES[5], isBlack: false, leftOffset: 120  },
-        { note: NOTES[6], isBlack: true, leftOffset: 0.7 * 40 + 120},
-        { note: NOTES[7], isBlack: false, leftOffset: 160  }, 
-        { note: NOTES[8], isBlack: true, leftOffset: 0.7 * 40 + 160},
-        { note: NOTES[9], isBlack: false, leftOffset: 200 },
-        { note: NOTES[10], isBlack: true, leftOffset: 0.7 * 40 + 200},
-        { note: NOTES[11], isBlack: false, leftOffset: 240  },
+    const octaveKeys: OctaveKeyTemplate[] = [
+        // The white keys are 40px wide so should be 40px away from each other
+        // The black keys are 20px wide so should be 28px from the left of 
+        // white key to its left
+        { noteIndex: 0, isBlack: false, octaveOffset: 0 },
+        { noteIndex: 1, isBlack: true, octaveOffset: 28 },
+        { noteIndex: 2, isBlack: false, octaveOffset: 40 },
+        { noteIndex: 3, isBlack: true, octaveOffset: 68},
+        { noteIndex: 4, isBlack: false, octaveOffset: 80 },
+        { noteIndex: 5, isBlack: false, octaveOffset: 120 },
+        { noteIndex: 6, isBlack: true, octaveOffset: 148 },
+        { noteIndex: 7, isBlack: false, octaveOffset: 160 }, 
+        { noteIndex: 8, isBlack: true, octaveOffset: 188 },
+        { noteIndex: 9, isBlack: false, octaveOffset: 200 },
+        { noteIndex: 10, isBlack: true, octaveOffset: 228 },
+        { noteIndex: 11, isBlack: false, octaveOffset: 240 },
     ];
+
+    const keys: PianoKeyData[] = [3, 4, 5].flatMap((octave, octaveIndex) => 
+        octaveKeys.map(template => (
+            {
+                note: NOTES[template.noteIndex] + octave,
+                isBlack: template.isBlack,
+                leftOffset: template.octaveOffset + octaveIndex * 280,
+            }
+        ))
+    );
 
     const handleClick = (note : string) => {
         playNote(note);
@@ -37,19 +57,23 @@ function Keyboard({ onClick }: KeyboardProps) {
     };
 
     return (
-        <div
+        <div className="keyboard-scroll-container">
+            <div
             className="keyboard"
-        >
-            {keys.map((key) => (
-                <PianoKey
-                    key={key.note}
-                    note={key.note} 
-                    isBlack={key.isBlack}
-                    leftOffset={key.leftOffset}
-                    onClick={handleClick}
-                />
-            ))}
+            >
+                {keys.map((key) => (
+                    <PianoKey
+                        key={key.note}
+                        note={key.note} 
+                        isBlack={key.isBlack}
+                        leftOffset={key.leftOffset}
+                        onClick={handleClick}
+                    />
+                ))}
+                
+            </div>
         </div>
+        
     );
 }
 
