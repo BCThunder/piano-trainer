@@ -35,7 +35,7 @@ function useScaleExercise() {
             }
 
             setIncorrectNote(null);
-            setFeedback(`Correct! ${note} is part of the scale.`);
+            setFeedback(`Correct! ${note.slice(0, -1)} is part of the scale.`);
         } else {
             setIncorrectNote(note);
             setFeedback(`Sorry, ${note} is not part of that scale. Try again!`);
@@ -73,3 +73,4 @@ function buildScale({rootNote, intervals}: ScaleProps) {
     return scale;
 }
 
+export default useScaleExercise;
