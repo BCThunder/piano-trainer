@@ -22,8 +22,20 @@
     z-index: 10;
 }
 
+.key.correct {
+    background-color: #abff6b;
+}
+
+.key.incorrect {
+    background-color: #ff4043;
+}
+
+.key.target {
+    background-color: #426cf5;
+}
+
 .keyboard {
     position: relative;
-    height: 100px;
+    height: 110px;
     width: 840px;
 }

@@ -1,6 +1,6 @@
 import PianoKey from './PianoKey';
 import usePianoAudio from './usePianoAudio';
-import { NOTES, ALL_NOTES } from "./constants";
+import { NOTES } from "./constants";
 import "./PianoStyling.css";
 
 interface OctaveKeyTemplate {
@@ -64,6 +64,7 @@ function Keyboard({ onClick, noteStates }: KeyboardProps) {
                 {keys.map((key) => (
                     <PianoKey
                         key={key.note}
+                        state={noteStates?.[key.note]}
                         note={key.note} 
                         isBlack={key.isBlack}
                         leftOffset={key.leftOffset}
