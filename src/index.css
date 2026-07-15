@@ -8,6 +8,9 @@
   --glow-correct: #4ade80;
   --glow-incorrect: #f87171;
   --glow-target: #818cf8;
+
+  --keyboard-width: 840px;
+  --keyboard-height: 110px;
 }
 
 body {

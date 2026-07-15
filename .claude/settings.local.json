@@ -1,7 +1,9 @@
 {
   "permissions": {
     "allow": [
-      "PowerShell(head -30)"
+      "PowerShell(head -30)",
+      "Bash(npm --version)",
+      "Bash(npm install *)"
     ]
   }
 }

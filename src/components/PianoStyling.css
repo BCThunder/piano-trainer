@@ -1,5 +1,28 @@
+@keyframes rise {
+    from { transform: translateY(0); opacity: 1; }
+    to { transform: translateY(-120px); opacity: 0; }
+}
+
 .keyboard-scroll-container {
     overflow-x: auto;
+}
+
+.midi-visualizer-container {
+    position: relative;
+    height: 150px;
+    width: var(--keyboard-width);
+    overflow: hidden;
+}
+
+.midi-sparkle {
+    position: absolute;
+    bottom: 0;
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    background-color: var(--glow-target);
+    box-shadow: 0px 0px 3px 2px var(--glow-target);
+    animation: rise 900ms ease-out forwards;
 }
 
 .key {
@@ -36,6 +59,6 @@
 
 .keyboard {
     position: relative;
-    height: 110px;
-    width: 840px;
+    height: var(--keyboard-height);
+    width: var(--keyboard-width);
 }

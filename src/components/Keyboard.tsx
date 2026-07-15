@@ -1,6 +1,12 @@
 import PianoKey from './PianoKey';
 import usePianoAudio from './usePianoAudio';
-import { NOTES } from "./constants";
+import { 
+    NOTES, 
+    WHITE_KEY_WIDTH, 
+    BLACK_KEY_WIDTH, 
+    SPARKLE_WIDTH 
+} from "./constants";
+import { useState, useRef } from "react";
 import "./PianoStyling.css";
 
 interface OctaveKeyTemplate {
@@ -19,6 +25,12 @@ interface KeyboardProps {
     onClick?: (note: string) => void;
     noteStates?: Record<string, 'correct' | 'incorrect' | 'target'>;
 }
+
+interface MidiSparkle {
+    id: number,
+    x: number,
+}
+
 
 function Keyboard({ onClick, noteStates }: KeyboardProps) {
     const { playNote } = usePianoAudio();
@@ -51,13 +63,38 @@ function Keyboard({ onClick, noteStates }: KeyboardProps) {
         ))
     );
 
+    const [midiSparkles, setMidiSparkles] = useState<MidiSparkle[]>([]);
+    const nextSparkleId = useRef(0);
+
     const handleClick = (note : string) => {
         playNote(note);
         onClick?.(note);
+
+        // Get the currently pressed key's data to create the midi sparkle
+        const pressedKey = keys.find(k => k.note === note);
+        if (!pressedKey) { return ; }
+        const keyWidth: number = pressedKey.isBlack ? BLACK_KEY_WIDTH : WHITE_KEY_WIDTH; 
+        const leftOffset: number = pressedKey.leftOffset;
+
+        const newSparkle: MidiSparkle = { 
+            id: nextSparkleId.current++, 
+            x: leftOffset + (keyWidth / 2) - (SPARKLE_WIDTH / 2),
+        };
+        setMidiSparkles(prev => [...prev, newSparkle]);
     };
 
     return (
         <div className="keyboard-scroll-container">
+            <div className="midi-visualizer-container">
+                {midiSparkles.map((sparkle) => (
+                    <div 
+                        className="midi-sparkle" 
+                        key={sparkle.id}
+                        style={{left: sparkle.x}}
+                    />
+                ))}
+            </div>
+            
             <div
             className="keyboard"
             >
