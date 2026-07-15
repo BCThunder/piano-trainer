@@ -1,8 +1,44 @@
 .App {
   text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  min-height: 100vh;
 }
 
 .active {
   font-weight: 900;
-  border-color: lightgreen;
+  border-color: var(--accent);
+}
+
+nav {
+  display: flex;
+  gap: 20px;
+  padding: 24px;
+  padding-left: 24px;
+  background-color: var(--accent-container);
+  width: 100%;
+}
+
+nav button {
+  cursor: pointer;
+  border-radius: 6px;
+  padding: 20px;
+  border: 2px solid transparent;
+  background-color: var(--bg-surface);
+  color: var(--text-primary);
+}
+
+.exercise-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 24px;
+  padding: 12px;
+  max-width: 900px;
+  width: 100%;
+}
+
+.exercise-container p {
+  margin: 0;
 }

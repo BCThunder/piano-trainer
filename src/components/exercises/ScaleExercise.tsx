@@ -15,25 +15,31 @@ function ScaleExercise() {
             } = useScaleExercise();
 
     return (
-        <div>
-            {prompt}
+        <div className="exercise-container">
+            <h1>Mark the Scale on the Keyboard</h1>
+            <h3>{prompt}</h3>
             <Keyboard onClick={onNotePressed} noteStates={noteStates} />
-            Hint: The major and minor scales can be built by picking a root note 
-            and completing a series of whole steps (two notes apart) and half 
-            steps (one note apart) ascending up in notes! <br />
+            <p>
+                Hint: The major and minor scales can be built by picking a root note 
+                and completing a series of whole steps (two notes apart) and half 
+                steps (one note apart) ascending up in notes!
+            </p>
             
-            { hintsEnabled && 
-                'Major: W, W, H, W, W, W, H Minor: W, H, W, W, H, W, W'
-            }
-            <br />
-            <button onClick={toggleHints}>Hint</button>
+            <p>
+                <button onClick={toggleHints}>Hint</button>
+                { hintsEnabled && 
+                    `Whole/Half Step Sequence: ${stepSequence}`
+                }
+            </p>
             
-            {feedback} <br />
+            <h3>{feedback}</h3>
+            
             {isComplete && 
                 <button onClick={nextExercise}>Next Exercise</button>
             }
-            <br />
-            Score: {score} 
+
+            <h3> Score: {score} </h3>
+            
         </div>
     )
 }

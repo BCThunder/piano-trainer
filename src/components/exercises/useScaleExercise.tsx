@@ -37,13 +37,13 @@ function useScaleExercise() {
             // so create an updated copy to use
             const newPressed = new Set(pressedNotes).add(note);
             setPressedNotes(newPressed);
+            setIncorrectNote(null);
+            setFeedback(`Correct! ${note.slice(0, -1)} is part of the scale.`);
+            
             if (newPressed.size === targetNotes.size) {
                 setScore((score) => score + 1);
                 setFeedback('Scale complete! Press Next Exercise to continue.');
             }
-
-            setIncorrectNote(null);
-            setFeedback(`Correct! ${note.slice(0, -1)} is part of the scale.`);
         } else {
             setIncorrectNote(note);
             setFeedback(`Sorry, ${note.slice(0, -1)} is not part of that scale. Try again!`);
@@ -57,6 +57,7 @@ function useScaleExercise() {
         setScaleKey(scaleKeys[Math.floor(Math.random() * scaleKeys.length)]);
         setPressedNotes(new Set());
         setIncorrectNote(null);
+        setFeedback("");
     };
     
     const noteStates: Record<string, 'correct' | 'incorrect' | 'target'> = {};

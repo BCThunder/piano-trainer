@@ -1,21 +1,19 @@
-import { useEffect, useState } from 'react';
 import Keyboard from "../Keyboard";
-import { NOTES } from "../constants";
 import useNoteExercise from './useNoteExercise';
 
 function NoteExercise() {
     const { prompt, noteStates, onNotePressed, score, feedback } = useNoteExercise();
 
     return (
-        <div>
-            <header>Find the Note on the Piano!</header> <br />
-            {prompt}
+        <div className='exercise-container'>
+            <h1>Find the Note on the Piano!</h1>
+            <h3>{prompt}</h3>
             <Keyboard 
                 onClick={onNotePressed}
                 noteStates={noteStates}
             />
             <div>
-                {feedback} <br />
+                {feedback}
                 Score: {score}
             </div>
         </div>
