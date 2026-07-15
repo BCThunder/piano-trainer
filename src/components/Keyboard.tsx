@@ -66,6 +66,10 @@ function Keyboard({ onClick, noteStates }: KeyboardProps) {
     const [midiSparkles, setMidiSparkles] = useState<MidiSparkle[]>([]);
     const nextSparkleId = useRef(0);
 
+    const handleSparkleAnimationEnd = (id: number) => {
+        setMidiSparkles(prev => prev.filter(sparkle => sparkle.id !== id));
+    };
+
     const handleClick = (note : string) => {
         playNote(note);
         onClick?.(note);
@@ -91,10 +95,11 @@ function Keyboard({ onClick, noteStates }: KeyboardProps) {
                         className="midi-sparkle" 
                         key={sparkle.id}
                         style={{left: sparkle.x}}
+                        onAnimationEnd={() => handleSparkleAnimationEnd(sparkle.id)}
                     />
                 ))}
             </div>
-            
+
             <div
             className="keyboard"
             >
