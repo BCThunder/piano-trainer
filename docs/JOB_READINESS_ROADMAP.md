@@ -19,13 +19,13 @@ stored, functional state updates, Web Audio API, conventional commits.
 The single biggest gap vs. postings. `npm test` currently *fails*: the stock
 `App.test.tsx` looks for a "learn react" link that no longer exists.
 
-- [ ] Delete or rewrite the stale `App.test.tsx` so the suite is green.
-- [ ] Unit-test the pure functions first — they need no React at all:
+- [X] Delete or rewrite the stale `App.test.tsx` so the suite is green.
+- [X] Unit-test the pure functions first — they need no React at all:
       - `buildScale` in `useScaleExercise.tsx` (export it): correct notes for
         C Major, a scale with sharps, a minor scale.
       - `getFrequency` in `usePianoAudio.tsx` (export it): A4 = 440,
         C4 ≈ 261.63.
-- [ ] Component-test one full exercise flow through `ScaleExercise` with
+- [X] Component-test one full exercise flow through `ScaleExercise` with
       React Testing Library: render, click a correct key → success feedback
       appears; click a wrong key → error feedback appears.
 - [ ] Test the hint toggle: enabling hints marks the next note as `target`.

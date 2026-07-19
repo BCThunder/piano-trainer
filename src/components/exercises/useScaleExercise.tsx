@@ -80,7 +80,7 @@ function useScaleExercise() {
         };
 }
 
-function buildScale({rootNote, intervals}: ScaleProps) {
+export function buildScale({rootNote, intervals}: ScaleProps) {
     let startIndex: number = ALL_NOTES.indexOf(rootNote);
     const scale: Array<string> = []
 

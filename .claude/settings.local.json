@@ -9,7 +9,8 @@
       "Read(//home/thund/.ssh/**)",
       "Bash(curl -s --max-time 10 https://github.com/BCThunder.keys)",
       "Bash(ssh-keygen -y -f ~/.ssh/id_ed25519 -P \"\")",
-      "Bash(git push *)"
+      "Bash(git push *)",
+      "Bash(npx react-scripts *)"
     ]
   }
 }
