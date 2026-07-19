@@ -3,7 +3,13 @@
     "allow": [
       "PowerShell(head -30)",
       "Bash(npm --version)",
-      "Bash(npm install *)"
+      "Bash(npm install *)",
+      "Bash(ssh -o BatchMode=yes -o ConnectTimeout=5 -T git@github.com)",
+      "Bash(echo \"exit: $?\")",
+      "Read(//home/thund/.ssh/**)",
+      "Bash(curl -s --max-time 10 https://github.com/BCThunder.keys)",
+      "Bash(ssh-keygen -y -f ~/.ssh/id_ed25519 -P \"\")",
+      "Bash(git push *)"
     ]
   }
 }
