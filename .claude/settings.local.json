@@ -10,7 +10,18 @@
       "Bash(curl -s --max-time 10 https://github.com/BCThunder.keys)",
       "Bash(ssh-keygen -y -f ~/.ssh/id_ed25519 -P \"\")",
       "Bash(git push *)",
-      "Bash(npx react-scripts *)"
+      "Bash(npx react-scripts *)",
+      "Bash(wsl -d Ubuntu bash -lc \"cd /home/bc/projects/piano-trainer && CI=true npx react-scripts test src/tests/useScaleExercise.test.tsx 2>&1 | tail -30\")",
+      "Bash(wsl -d Ubuntu bash -lc \"which node; ls ~/.nvm 2>/dev/null && echo nvm-exists; cat /home/bc/projects/piano-trainer/.nvmrc 2>/dev/null\")",
+      "Bash(wsl -d Ubuntu bash -lc 'export NVM_DIR=$HOME/.nvm && . $NVM_DIR/nvm.sh && cd /home/bc/projects/piano-trainer && CI=true npx react-scripts test src/tests/useScaleExercise.test.tsx 2>&1 | tail -35')",
+      "Bash(wsl -d Ubuntu bash -c 'export NVM_DIR=\"$HOME/.nvm\"; . \"$NVM_DIR/nvm.sh\"; cd /home/bc/projects/piano-trainer && CI=true npx react-scripts test src/tests/useScaleExercise.test.tsx 2>&1 | tail -35')",
+      "Bash(wsl -d Ubuntu bash -c 'export NVM_DIR=\"$HOME/.nvm\"; . \"$NVM_DIR/nvm.sh\"; nvm use default >/dev/null 2>&1; cd /home/bc/projects/piano-trainer && CI=true npx react-scripts test src/tests/useScaleExercise.test.tsx 2>&1 | tail -35')",
+      "Bash(wsl -d Ubuntu bash -c 'export NVM_DIR=\"$HOME/.nvm\"; . \"$NVM_DIR/nvm.sh\"; ls \"$NVM_DIR/versions/node\"; nvm use default; which node npx')",
+      "Bash(wsl -d Ubuntu bash -c 'export HOME=/home/bc; export NVM_DIR=\"$HOME/.nvm\"; . \"$NVM_DIR/nvm.sh\"; nvm use default >/dev/null; cd \"$HOME/projects/piano-trainer\" && CI=true npx react-scripts test src/tests/useScaleExercise.test.tsx 2>&1 | tail -35')",
+      "Bash(wsl -d Ubuntu bash -c 'ls -d /home/bc/.nvm/versions/node/*/bin 2>/dev/null; ls /usr/local/bin/node /usr/bin/node 2>/dev/null')",
+      "Bash(wsl -d Ubuntu bash -c 'export PATH=/home/bc/.nvm/versions/node/v24.16.0/bin:$PATH; cd /home/bc/projects/piano-trainer && CI=true npx react-scripts test src/tests/useScaleExercise.test.tsx 2>&1 | tail -35')",
+      "Bash(wsl -d Ubuntu bash -c 'PATH=/home/bc/.nvm/versions/node/v24.16.0/bin:/usr/bin:/bin; cd /home/bc/projects/piano-trainer && CI=true npx react-scripts test 2>&1 | tail -20')",
+      "Bash(wsl -d Ubuntu bash -c 'export PATH=/home/bc/.nvm/versions/node/v24.16.0/bin:$PATH; cd /home/bc/projects/piano-trainer && CI=true npx react-scripts test 2>&1 | grep -E \"Tests:|Test Suites:|FAIL|✓|✗\"')"
     ]
   }
 }
