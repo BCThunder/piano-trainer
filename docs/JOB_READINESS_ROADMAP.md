@@ -14,6 +14,26 @@ stored, functional state updates, Web Audio API, conventional commits.
 
 ---
 
+## Revised order for an active job search
+
+The phases below are numbered by dependency, but a recruiter screening a
+portfolio never sees your bundler — they see the README and whether there's a
+live link. When applications are going out *now*, run the phases in this order:
+
+1. **Phase 4** (README + deploy) — the visible surface, ~1 day.
+2. **Phase 3** (accessibility + keyboard input) — highest code-craft signal for
+   this app; a piano you can't play with a keyboard is a visible miss.
+3. **Phase 1 remainder** — the real interaction tests (see the note below).
+4. **Phase 2** (Vite migration) — real learning value, but invisible to a
+   screener and carries breakage risk. Safe to defer once interviews land.
+   The ESLint + Prettier + npm-scripts sub-task inside it is independent and
+   low-risk — pull it forward and do it any time.
+5. **Phase 5** (async / data) — `localStorage` via a `useLocalStorage` hook is
+   the smallest high-signal option; Web MIDI is the better interview story if
+   the search runs long.
+
+---
+
 ## Phase 1 — Real tests
 
 The single biggest gap vs. postings. `npm test` currently *fails*: the stock
@@ -25,10 +45,16 @@ The single biggest gap vs. postings. `npm test` currently *fails*: the stock
         C Major, a scale with sharps, a minor scale.
       - `getFrequency` in `usePianoAudio.tsx` (export it): A4 = 440,
         C4 ≈ 261.63.
-- [X] Component-test one full exercise flow through `ScaleExercise` with
+- [ ] Component-test one full exercise flow through `ScaleExercise` with
       React Testing Library: render, click a correct key → success feedback
       appears; click a wrong key → error feedback appears.
+      (NOT done yet — no such test exists. `@testing-library/user-event` is
+      installed but imported nowhere.)
 - [ ] Test the hint toggle: enabling hints marks the next note as `target`.
+      (`src/tests/useScaleExercise.test.tsx` does not do this — it never calls
+      `toggleHints`, and with hints off `noteStates` is `{}` so its
+      `Object.values(...).every(...)` assertion is vacuously true. Rewrite it to
+      actually toggle hints and assert on the resulting `target` entry.)
 - [ ] (Stretch) Mock `AudioContext` in tests — jsdom doesn't provide it, so
       clicking keys in tests will force you to learn `jest.mock` / test doubles.
 
@@ -105,8 +131,10 @@ README are what earn the click into your source code.
       section (the Web Audio math, derived state, the CRA→Vite migration).
 - [ ] Deploy to Netlify, Vercel, or GitHub Pages and put the live URL at the
       top of the README and in the GitHub repo's About field.
-- [ ] (Stretch) Add a GitHub Actions workflow that runs lint + tests on every
-      push — CI familiarity shows up in postings and takes ~20 lines of YAML.
+- [ ] Add a GitHub Actions workflow that runs lint + typecheck + tests on every
+      push — CI familiarity shows up in postings, takes ~20 lines of YAML, and
+      puts a visible green check on every commit. (Was a stretch goal; it's
+      cheap enough to be a real one.)
 
 Concepts to learn: static hosting and what a production build artifact is,
 basic CI (triggers, jobs, failing a build on test failure).

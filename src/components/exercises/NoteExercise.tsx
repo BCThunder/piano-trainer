@@ -13,8 +13,7 @@ function NoteExercise() {
                 noteStates={noteStates}
             />
             <div>
-                {feedback}
-                Score: {score}
+                {feedback} Score: {score}
             </div>
         </div>
         
