@@ -46,7 +46,7 @@ function useScaleExercise() {
             }
         } else {
             setIncorrectNote(note);
-            setFeedback(`Sorry, ${note.slice(0, -1)} is not part of that scale. Try again!`);
+            setFeedback(`Sorry, ${note} is not in this scale run. Stay within ${scaleNotes[0]}–${scaleNotes[scaleNotes.length - 1]}.`);
         }
     }
 
