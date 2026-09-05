@@ -1,5 +1,5 @@
 import { useState } from "react"
-import { ALL_NOTES } from "../constants"
+import { ALL_NOTES, NoteState } from "../constants"
 
 interface ScaleProps {
     rootNote: string,
@@ -46,7 +46,7 @@ function useScaleExercise() {
             }
         } else {
             setIncorrectNote(note);
-            setFeedback(`Sorry, ${note.slice(0, -1)} is not part of that scale. Try again!`);
+            setFeedback(`Sorry, ${note} is not in this scale run. Stay within ${scaleNotes[0]}–${scaleNotes[scaleNotes.length - 1]}.`);
         }
     }
 
@@ -60,7 +60,7 @@ function useScaleExercise() {
         setFeedback("");
     };
     
-    const noteStates: Record<string, 'correct' | 'incorrect' | 'target'> = {};
+    const noteStates: Record<string, NoteState> = {};
     pressedNotes.forEach(note => { noteStates[note] = 'correct' });
     if (hintsEnabled && nextNote) noteStates[nextNote] = 'target';
     if (incorrectNote) noteStates[incorrectNote] = 'incorrect';

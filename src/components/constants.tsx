@@ -11,3 +11,7 @@ export const WHITE_KEY_WIDTH = 40;
 export const BLACK_KEY_WIDTH = 20;
 
 export const SPARKLE_WIDTH = 10;    // hardcoded value in PianoStyling.css
+
+// The visual state a piano key can be in; each value is also a CSS class
+// in PianoStyling.css.
+export type NoteState = 'correct' | 'incorrect' | 'target';

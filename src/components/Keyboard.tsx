@@ -4,7 +4,8 @@ import {
     NOTES, 
     WHITE_KEY_WIDTH, 
     BLACK_KEY_WIDTH, 
-    SPARKLE_WIDTH 
+    SPARKLE_WIDTH,
+    NoteState,
 } from "./constants";
 import { useState, useRef } from "react";
 import "./PianoStyling.css";
@@ -23,7 +24,7 @@ interface PianoKeyData {
 
 interface KeyboardProps {
     onClick?: (note: string) => void;
-    noteStates?: Record<string, 'correct' | 'incorrect' | 'target'>;
+    noteStates?: Record<string, NoteState>;
 }
 
 interface MidiSparkle {
