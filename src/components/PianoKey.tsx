@@ -1,3 +1,4 @@
+import { NoteState } from './constants';
 import './PianoStyling.css';
 
 interface PianoKeyProps {
@@ -5,7 +6,7 @@ interface PianoKeyProps {
     isBlack: boolean,
     leftOffset: number,
     onClick: (note: string) => void,
-    state?:  'correct' | 'incorrect' | 'target',
+    state?: NoteState,
 }
 
 function PianoKey({note, isBlack, leftOffset, onClick, state}: PianoKeyProps) {

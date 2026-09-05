@@ -1,11 +1,11 @@
 import { useState } from "react";
-import { NOTES } from "../constants";
+import { NOTES, NoteState } from "../constants";
 
 function useNoteExercise() {
     const [targetNote, setTargetNote] = useState("C");
     const [score, setScore] = useState(0);
     const [feedback, setFeedback] = useState("");
-    const [noteStates, setNoteStates] = useState<Record<string, 'correct' | 'incorrect' | 'target'>>({});
+    const [noteStates, setNoteStates] = useState<Record<string, NoteState>>({});
     
     const prompt : string = `Find ${targetNote} on the keyboard`;
 
