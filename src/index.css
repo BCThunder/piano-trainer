@@ -1,30 +1,92 @@
+/*
+ * Design tokens — the single source of truth for the whole app.
+ * No component CSS file should contain a raw hex colour; everything
+ * below is referenced as var(--token) from App.css / Keyboard.css / PianoKey.css.
+ */
 :root {
-  --bg-primary: #141414;
-  --bg-surface: #1e1e2a;
-  --accent: #7c6be0;
-  --accent-container: #4124e0;
-  --text-primary: #e8e8f0;
-  --text-muted: #6b6b80;
-  --glow-correct: #4ade80;
-  --glow-incorrect: #f87171;
-  --glow-target: #818cf8;
+  /* Colour */
+  --background-color: #F0F4FF;
+  --background-color-hover: #E3EBFF;
+  --primary-color: #4285F4;
+  --primary-color-dark: #3367D6;
+  --correct-color: #34A853;
+  --incorrect-color: #EA4335;
+  --highlight-color: #FBBC04;
+  --highlight-color-dark: #F9A825;
+  --white-key-color: #FFFFFF;
+  --white-key-hover: #F0F4FF;
+  --black-key-color: #1A1A2E;
+  --black-key-hover: #2D2D4E;
+  --key-border-color: #CCCCCC;
+  --text-color: #202124;
+  --text-muted: #5F6368;
+  --card-bg-color: #FFFFFF;
 
+  /* Channel triplets, so rgba() can vary the alpha of a token colour */
+  --primary-rgb: 66, 133, 244;
+  --highlight-rgb: 251, 188, 4;
+
+  /* Spacing scale */
+  --space-1: 0.25rem;
+  --space-2: 0.5rem;
+  --space-3: 1rem;
+  --space-4: 1.5rem;
+  --space-5: 2rem;
+
+  /* Radii */
+  --radius-sm: 6px;
+  --radius-md: 12px;
+  --radius-lg: 16px;
+
+  /* Elevation — a full box-shadow value can live in a custom property */
+  --shadow-card: 0 4px 20px rgba(0, 0, 0, 0.08);
+  --shadow-key: 0 4px 6px rgba(0, 0, 0, 0.1);
+  --shadow-key-pressed: 0 1px 2px rgba(0, 0, 0, 0.15);
+  --shadow-black-key: 0 4px 8px rgba(26, 26, 46, 0.4);
+
+  /* Typography */
+  --font-body: 'Nunito', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  --font-size-title: 2rem;
+  --font-size-instruction: 1.25rem;
+  --font-size-feedback: 1rem;
+  --font-size-label: 0.75rem;
+
+  /* Keyboard geometry — mirrored by the offsets in constants.tsx */
   --keyboard-width: 840px;
-  --keyboard-height: 110px;
+  --keyboard-height: 100px;
+  --white-key-width: 40px;
+  --white-key-height: 100px;
+  --black-key-width: 24px;
+  --black-key-height: 62px;
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
 }
 
 body {
   margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
-    sans-serif;
+  padding: 0;
+  font-family: var(--font-body);
+  background-color: var(--background-color);
+  color: var(--text-color);
+  min-height: 100vh;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  background-color: var(--bg-primary);
-  color: var(--text-primary);
 }
 
 code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
-    monospace;
+  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New', monospace;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
 }

@@ -6,39 +6,50 @@
   min-height: 100vh;
 }
 
-.active {
-  font-weight: 900;
-  border-color: var(--accent);
-}
+/* ---------- Navigation ---------- */
 
 nav {
   display: flex;
-  gap: 20px;
-  padding: 24px;
-  padding-left: 24px;
-  background-color: var(--accent-container);
+  justify-content: center;
+  gap: var(--space-3);
+  padding: var(--space-3) var(--space-4);
   width: 100%;
+  background-color: var(--card-bg-color);
+  box-shadow: var(--shadow-card);
 }
 
 nav button {
   cursor: pointer;
-  border-radius: 6px;
-  padding: 20px;
+  font-family: inherit;
+  font-size: 1rem;
+  font-weight: 700;
+  padding: var(--space-2) var(--space-4);
   border: 2px solid transparent;
-  background-color: var(--bg-surface);
-  color: var(--text-primary);
+  border-radius: 999px;
+  background-color: var(--background-color);
+  color: var(--primary-color);
+  transition: background-color 0.15s ease, color 0.15s ease, transform 0.1s ease;
 }
 
-.exercise-container {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 24px;
-  padding: 12px;
-  max-width: 900px;
-  width: 100%;
+nav button:hover {
+  background-color: var(--background-color-hover);
 }
 
-.exercise-container p {
-  margin: 0;
+nav button:active {
+  transform: translateY(1px);
+}
+
+nav button:focus-visible {
+  outline: 3px solid var(--highlight-color);
+  outline-offset: 2px;
+}
+
+nav button.active {
+  background-color: var(--primary-color);
+  color: var(--white-key-color);
+  font-weight: 800;
+}
+
+nav button.active:hover {
+  background-color: var(--primary-color-dark);
 }

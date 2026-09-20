@@ -1,5 +1,5 @@
 import { NoteState } from './constants';
-import './PianoStyling.css';
+import './PianoKey.css';
 
 interface PianoKeyProps {
     note: string,

@@ -8,7 +8,7 @@ import {
     NoteState,
 } from "./constants";
 import { useState, useRef } from "react";
-import "./PianoStyling.css";
+import "./Keyboard.css";
 
 interface OctaveKeyTemplate {
     noteIndex: number,

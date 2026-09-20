@@ -1,0 +1,79 @@
+/* Appearance of a single piano key.
+   The class list is `key` + (`white` | `black`) + an optional NoteState
+   (`correct` | `incorrect` | `target`) from constants.tsx. */
+
+.key {
+    position: absolute;
+    cursor: pointer;
+    transition: background-color 0.1s ease, transform 0.1s ease,
+                box-shadow 0.1s ease;
+}
+
+.key.white {
+    width: var(--white-key-width);
+    height: var(--white-key-height);
+    background-color: var(--white-key-color);
+    border: 1px solid var(--key-border-color);
+    border-radius: 0 0 var(--radius-sm) var(--radius-sm);
+    box-shadow: var(--shadow-key);
+}
+
+.key.black {
+    width: var(--black-key-width);
+    height: var(--black-key-height);
+    background-color: var(--black-key-color);
+    border-radius: 0 0 4px 4px;
+    box-shadow: var(--shadow-black-key);
+    z-index: 10;
+}
+
+/* Hover */
+
+.key.white:hover {
+    background-color: var(--white-key-hover);
+}
+
+.key.black:hover {
+    background-color: var(--black-key-hover);
+}
+
+/* Pressed — the key dips and its shadow tightens, like a real key */
+
+.key:active {
+    transform: translateY(2px);
+    box-shadow: var(--shadow-key-pressed);
+}
+
+/* Exercise feedback states. These come last so they win over :hover. */
+
+.key.correct,
+.key.white.correct:hover,
+.key.black.correct:hover {
+    background-color: var(--correct-color);
+}
+
+.key.incorrect,
+.key.white.incorrect:hover,
+.key.black.incorrect:hover {
+    background-color: var(--incorrect-color);
+}
+
+.key.white.target,
+.key.white.target:hover {
+    background-color: var(--highlight-color);
+}
+
+.key.black.target,
+.key.black.target:hover {
+    background-color: var(--highlight-color-dark);
+}
+
+@keyframes pulse {
+    0%   { box-shadow: 0 0 0 0 rgba(var(--highlight-rgb), 0.6); }
+    70%  { box-shadow: 0 0 0 8px rgba(var(--highlight-rgb), 0); }
+    100% { box-shadow: 0 0 0 0 rgba(var(--highlight-rgb), 0); }
+}
+
+.key.target {
+    animation: pulse 1.2s infinite;
+}

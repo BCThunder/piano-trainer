@@ -1,0 +1,126 @@
+/* Layout shell for every exercise: title, then a 75/25 panel row. */
+
+.exercise-layout {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-4);
+    width: 100%;
+    max-width: 1500px;
+    padding: var(--space-5) var(--space-3);
+}
+
+.exercise-title {
+    margin: 0;
+    text-align: center;
+    font-size: var(--font-size-title);
+    font-weight: 800;
+    color: var(--primary-color);
+}
+
+/* minmax(0, ...) is load-bearing: grid items default to `min-width: auto`,
+   so the fixed 840px keyboard would otherwise force the first column wider
+   than 3fr and break the ratio. */
+.exercise-panels {
+    display: grid;
+    grid-template-columns: minmax(0, 3fr) minmax(0, 1fr);
+    gap: var(--space-4);
+    align-items: start;
+}
+
+.panel {
+    padding: var(--space-5);
+    background-color: var(--card-bg-color);
+    border-radius: var(--radius-lg);
+    box-shadow: var(--shadow-card);
+}
+
+.panel--piano {
+    display: flex;
+    justify-content: center;
+}
+
+.panel--info {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-3);
+    text-align: center;
+}
+
+/* ---------- Info panel contents ---------- */
+
+.panel--info h3 {
+    margin: 0;
+    font-size: var(--font-size-instruction);
+    font-weight: 600;
+    color: var(--text-color);
+}
+
+.panel--info p {
+    margin: 0;
+    color: var(--text-muted);
+    line-height: 1.6;
+}
+
+.panel--info .exercise-hint {
+    font-size: var(--font-size-label);
+    text-align: left;
+}
+
+/* Two classes so these still outrank `.panel--info p` above. */
+.panel--info .exercise-feedback {
+    font-size: var(--font-size-feedback);
+    font-weight: 700;
+    min-height: 1.5rem;
+}
+
+.panel--info .exercise-feedback.correct {
+    color: var(--correct-color);
+}
+
+.panel--info .exercise-feedback.incorrect {
+    color: var(--incorrect-color);
+}
+
+.panel--info .exercise-score {
+    font-size: var(--font-size-title);
+    font-weight: 800;
+    color: var(--primary-color);
+}
+
+.panel--info button {
+    cursor: pointer;
+    font-family: inherit;
+    font-size: 1rem;
+    font-weight: 700;
+    padding: var(--space-2) var(--space-4);
+    border: none;
+    border-radius: var(--radius-sm);
+    background-color: var(--primary-color);
+    color: var(--white-key-color);
+    transition: background-color 0.15s ease, transform 0.1s ease;
+}
+
+.panel--info button:hover {
+    background-color: var(--primary-color-dark);
+}
+
+.panel--info button:active {
+    transform: translateY(1px);
+}
+
+.panel--info button:focus-visible {
+    outline: 3px solid var(--highlight-color);
+    outline-offset: 2px;
+}
+
+/* Below ~1180px the keyboard can no longer fit inside a 75% column, so
+   stacking beats a cramped two-column row. */
+@media (max-width: 1100px) {
+    .exercise-panels {
+        grid-template-columns: minmax(0, 1fr);
+    }
+
+    .panel--info .exercise-hint {
+        text-align: center;
+    }
+}

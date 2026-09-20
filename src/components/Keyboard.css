@@ -1,0 +1,64 @@
+/* Layout and effects that belong to the keyboard as a whole.
+   Individual key appearance lives in PianoKey.css. */
+
+@keyframes rise {
+    from { transform: translateY(0); opacity: 1; }
+    to   { transform: translateY(-120px); opacity: 0; }
+}
+
+.keyboard-scroll-container {
+    display: flex;
+    flex-direction: column;
+    /* `safe` falls back to start-alignment when the keyboard overflows a
+       narrow panel; plain `center` would overflow both edges and leave the
+       lowest keys unreachable by scrolling. The bare `center` above is the
+       fallback for browsers that reject the `safe` keyword outright. */
+    align-items: center;
+    align-items: safe center;
+    max-width: 100%;
+    overflow-x: auto;
+    padding-bottom: var(--space-2);
+    scrollbar-color: var(--primary-color) var(--background-color);
+    scrollbar-width: thin;
+}
+
+.keyboard-scroll-container::-webkit-scrollbar {
+    height: 8px;
+}
+
+.keyboard-scroll-container::-webkit-scrollbar-track {
+    background: var(--background-color);
+    border-radius: 999px;
+}
+
+.keyboard-scroll-container::-webkit-scrollbar-thumb {
+    background: var(--primary-color);
+    border-radius: 999px;
+}
+
+.midi-visualizer-container {
+    position: relative;
+    height: 150px;
+    width: var(--keyboard-width);
+    overflow: hidden;
+    flex-shrink: 0;
+}
+
+.midi-sparkle {
+    position: absolute;
+    bottom: 0;
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    background-color: var(--primary-color);
+    box-shadow: 0 0 3px 2px rgba(var(--primary-rgb), 0.45);
+    animation: rise 900ms ease-out forwards;
+}
+
+.keyboard {
+    position: relative;
+    height: var(--keyboard-height);
+    width: var(--keyboard-width);
+    margin-top: var(--space-5);
+    flex-shrink: 0;
+}

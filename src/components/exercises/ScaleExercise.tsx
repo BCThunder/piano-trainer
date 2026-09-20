@@ -1,4 +1,5 @@
 import Keyboard from "../Keyboard";
+import ExerciseLayout from "./ExerciseLayout";
 import useScaleExercise from "./useScaleExercise";
 
 function ScaleExercise() {
@@ -15,32 +16,39 @@ function ScaleExercise() {
             } = useScaleExercise();
 
     return (
-        <div className="exercise-container">
-            <h1>Mark the Scale on the Keyboard</h1>
-            <h3>{prompt}</h3>
-            <Keyboard onClick={onNotePressed} noteStates={noteStates} />
-            <p>
-                Hint: The major and minor scales can be built by picking a root note 
-                and completing a series of whole steps (two notes apart) and half 
-                steps (one note apart) ascending up in notes!
-            </p>
-            
-            <p>
-                <button onClick={toggleHints}>Hint</button>
-                { hintsEnabled && 
-                    `Whole/Half Step Sequence: ${stepSequence}`
-                }
-            </p>
-            
-            <h3>{feedback}</h3>
-            
-            {isComplete && 
-                <button onClick={nextExercise}>Next Exercise</button>
+        <ExerciseLayout
+            title="Mark the Scale on the Keyboard"
+            keyboard={
+                <Keyboard onClick={onNotePressed} noteStates={noteStates} />
             }
+            info={
+                <>
+                    <h3>{prompt}</h3>
 
-            <h3> Score: {score} </h3>
-            
-        </div>
+                    <p className="exercise-hint">
+                        Hint: The major and minor scales can be built by picking a root note 
+                        and completing a series of whole steps (two notes apart) and half 
+                        steps (one note apart) ascending up in notes!
+                    </p>
+
+                    <button onClick={toggleHints}>Hint</button>
+
+                    { hintsEnabled &&
+                        <p className="exercise-hint">
+                            {`Whole/Half Step Sequence: ${stepSequence}`}
+                        </p>
+                    }
+
+                    <p className="exercise-feedback">{feedback}</p>
+
+                    {isComplete && 
+                        <button onClick={nextExercise}>Next Exercise</button>
+                    }
+
+                    <p className="exercise-score">Score: {score}</p>
+                </>
+            }
+        />
     )
 }
 
