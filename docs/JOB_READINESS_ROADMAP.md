@@ -165,3 +165,54 @@ subscriptions.
 
 Done when: the app has at least one feature involving async work with
 explicit loading and error handling you can walk through in an interview.
+
+---
+
+## Phase 6 — Backend & SQL (Postgres)
+
+Many junior postings want "some familiarity with SQL/Postgres" even for a
+frontend-leaning role. `server/` now has a minimal Express API backed by
+Postgres, using raw SQL (`pg`, no ORM) so the SQL itself is the thing you
+write, not generated. This also completes Phase 5's "Fetch from an API"
+item — once wired up, it's your own API instead of a public one.
+
+Already scaffolded (read before extending): `server/sql/schema.sql` (two
+tables — `exercise_types` lookup table, `practice_sessions` fact table with
+a foreign key to it), `server/src/db.ts` (a shared `pg` `Pool`),
+`server/src/index.ts` (`POST /api/sessions` to insert a completed exercise,
+`GET /api/sessions` to list the 50 most recent, joined against
+`exercise_types`). See [server/README.md](../server/README.md) to run it.
+
+- [X] Get it running: `docker compose up -d`, `cd server && npm install &&
+      npm run migrate && npm run dev`. Hit `POST /api/sessions` with curl or
+      Postman, then confirm the row shows up via `GET /api/sessions`.
+      (Needed an apt `docker-ce` reinstall — the snap Docker package doesn't
+      reliably support the `docker` group on WSL2.)
+- [X] Write `GET /api/stats`: one aggregate query using `GROUP BY` and
+      `AVG`/`COUNT` — accuracy and session count per exercise type. Written
+      from scratch in `psql`, clause by clause, then moved into Express;
+      aliased with `AS session_count` / `AS avg_accuracy` for a readable
+      response.
+- [ ] Wire the frontend: after a scale/note exercise completes, `POST` the
+      result to `/api/sessions` (loading/error state, same pattern as
+      Phase 5). Add a small stats view that reads `GET /api/stats`.
+- [ ] Add one more query yourself: e.g. longest daily practice streak, or
+      most-practiced root note — something that needs `WHERE`/`ORDER BY`/
+      `LIMIT` beyond the scaffolded examples.
+- [ ] (Stretch) Add a second migration file and a naive runner (or adopt
+      `node-pg-migrate`) instead of the single `schema.sql` re-run — this is
+      what "database migrations" means on the job.
+- [ ] (Stretch) Deploy: host Postgres on a free tier (Neon/Supabase) and the
+      API on Render/Fly.io, then point the deployed frontend at it.
+
+Concepts to learn: primary vs. foreign keys and why `practice_sessions`
+references `exercise_types` instead of storing the name directly,
+parameterized queries (`$1, $2, ...`) and why string-concatenating SQL is a
+SQL-injection risk, `JOIN` vs. `GROUP BY` (joining relates rows,
+grouping collapses them), connection pooling (why `db.ts` creates one
+`Pool` instead of connecting per request), and migrations as version
+control for schema.
+
+Done when: you can explain the schema, write a `GROUP BY` query from
+scratch without a reference, and the frontend persists and displays real
+practice history through your own API.

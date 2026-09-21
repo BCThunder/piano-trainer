@@ -21,6 +21,7 @@ A browser piano trainer for note recognition and scale practice, built with Reac
 | TypeScript | A key's visual state is one `NoteState` union shared by the hook, `Keyboard`, and `PianoKey`. Since each value is also a CSS class, a typo would render an unstyled key with no error — the union turns that into a compile failure. |
 | Web Audio API | Tones are synthesised directly from an oscillator so no samples are required. |
 | Jest + React Testing Library | Pure functions (`buildScale`, `getFrequency`) unit-tested directly; component tests query by role and label, the way a user finds things. |
+| Express + PostgreSQL (`server/`) | Practice history API, written with raw SQL (no ORM) — see [server/README.md](server/README.md). |
 
 ## Running locally
 

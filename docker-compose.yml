@@ -1,0 +1,15 @@
+services:
+  db:
+    image: postgres:16-alpine
+    restart: unless-stopped
+    environment:
+      POSTGRES_USER: piano
+      POSTGRES_PASSWORD: piano
+      POSTGRES_DB: piano_trainer
+    ports:
+      - "5432:5432"
+    volumes:
+      - piano-trainer-db:/var/lib/postgresql/data
+
+volumes:
+  piano-trainer-db:
